@@ -9,7 +9,7 @@ const morgan = require("morgan");
 //creamos el servidor
 const app = express();
 
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
 // conectamos a la base de datos
 

@@ -4,15 +4,35 @@ const fs = require("fs");
 const path = require("path");
 const { PGUSER, PGDATABASE, PGPASSWORD, PGHOST, PGPORT } = process.env;
 const bcrypt = require("bcrypt")
-//creamos la instancia de sequelize
+
+//conexion online
+// const sequelize = new Sequelize(
+//   "postgres://emprendar_r2dy_user:9JBOHhbNSD9uBMDuSdEzHhQXaPCQ3lZx@dpg-col816ocmk4c73bnfdjg-a.oregon-postgres.render.com/emprendar_r2dy",
+//   {
+//     dialect: "postgres",
+//     logging: false,
+//     native: false,
+//     dialectOptions: {
+//       ssl: true
+//     }
+//   }
+// );
+
+//conexion local
+
 const sequelize = new Sequelize(
   `postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}:${PGPORT}/${PGDATABASE}`,
   {
     dialect: "postgres",
     logging: false,
     native: false,
+  
   }
 );
+ 
+
+
+
 
 //creamos una funcion para conectarnos a la bd
 const conectarDB = async () => {
@@ -92,21 +112,44 @@ sequelize
       "Guatemala",
     ];
 
-    let admin =  { user_name: "Emprendar", name: "Emprendar", last_name: "Admin", email: "emprendar@emprendar.com", password: "emprendar123", profile_img: "https://bestbuyerpersona.com/wp-content/uploads/2022/02/undraw_profile_pic_ic5t.png", confirmed: true, isAdmin: true }
+    let admin =  { user_name: "Emprendar", name: "Emprendar", last_name: "Admin", email: "emprendar@emprendar.com", password: "emprendar123", profile_img: "", confirmed: true, isAdmin: true }
 
+    // await User.findOrCreate(
+    //   {
+    //     ...admin,password: await bcrypt.hash(admin.password, 8)
+    //   }
+    // )
     await User.findOrCreate({
-        ...admin,password: await bcrypt.hash(admin.password, 8)
+      where:{user_name : admin.user_name},
+      defaults:{
+        ...admin,
+        password: await bcrypt.hash(admin.password, 8)
+      } 
     })
+/
 
     arrCountry.forEach(async (country) => {
       Country.findOrCreate({
-        name: country,
+        where : {
+          name: country
+        },
+        defaults : { 
+          name: country,
+
+        } 
+
       });
     });
 
+
+
     arrCategory.forEach(async (cat) => {
       await Category.findOrCreate({
-        name: cat,
+        where : {name:cat},
+        defaults : {
+          name: cat,
+
+        }
       });
     });
   })
