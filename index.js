@@ -16,12 +16,12 @@ console.log(process.env.FRONTEND_URL);
 const opcionesCors = {
   origin: process.env.FRONTEND_URL,
   methods: 'GET,POST,PUT',
-  allowedHeaders: 'Content-Type',
-  credentials: true,
+  allowedHeaders: 'Content-Type,Authorization', // Permitir encabezado Authorization
+  credentials: true, // Permitir credenciales si es necesario
 }; 
 
 app.use(cors(opcionesCors));
-
+app.options('*', cors(corsOptions)); // Permitir solicitudes preflight para todas las rutas
 //habilitamos leer los valores del body
 
 app.use(express.json());
