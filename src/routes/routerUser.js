@@ -47,55 +47,10 @@ routerUser.get("/login/me", checkAuth, authedUserhl);
 routerUser.get("/admin/users", getAllUserDataAdmin);
 routerUser.put("/admin/enableUser/:id", enableUserByAdminHl)
 routerUser.put("/admin/deleteUser/:id", deleteUserByAdminHl)
-
-
-// routerUser.get(
-//   "/auth/google",
-//   passport.authenticate("google"),
-//   function (req, res) {
-
-//   }
-// );
-
-// routerUser.get(
-//   "/auth/google/callback",
-//   passport.authenticate("google", {
-//     failureRedirect: "/auth/google",
-//     session: false,
-//   }),
-//   (req, res) => {
-
-//     try{
-//     const userString = JSON.stringify(req.user);
-//     console.log(req.url)
-//     res.send(
-//       ` 
-//       <!DOCTYPE html>
-//       <html lang="en">
-
-//       <body>
-          
-
-//       </body>
-//       <script> window.opener.postMessage(${userString}, '${process.env.FRONTEND_URL}') </script>
-//       </html>
-//       `
-//     )}catch (error) {
-//       res.status(400).json({error: error.message})
-//     }
-//   }
-// );
-
 routerUser.post('/config/resetpassword', resetPasswordHl)
 routerUser.get('/config/resetpassword/:token', comprobarTokenHl)
-
 routerUser.post('/config/resetpassword/:token', newPasswordHl)
-
 routerUser.post('/config/changepassword/', changePasswordHl)
-
 routerUser.post('/config/verifyPassword', verifyPasswordHl)
-
 routerUser.post('/contactUs/sendMessage', contactUsHl)
-
-
 module.exports = routerUser;

@@ -166,9 +166,6 @@ const getAllUsers = async (data, pageNum = 6) => {
     })
   }
 
-
-  console.log(result)
-
   return {
     data: result,
     pages: Math.ceil(count / pageNum),
@@ -425,14 +422,11 @@ const newPassword = async (token, password) => {
 }
 
 const verifyPassword = async (password, id) => {
-  console.log('Llega al controller')
-  console.log('password ->', password)
-  console.log('id ->', id)
+  
   if (!password || !id) {
     throw new Error('Falta algunos de los datos')
   } else {
     const user = await User.findByPk(id)
-    console.log(user)
 
     const passwordIsTheSame = bcrypt.compareSync(password, user.password)
 
@@ -443,9 +437,7 @@ const verifyPassword = async (password, id) => {
 
 const changePassword = async (id, newPassword) => {
 
-  console.log('id en el controller ->', id)
-  console.log('pass en el controller ->', newPassword)
-  console.log('typeof ->', typeof newPassword);
+ 
 
   const user = await User.findByPk(id)
   user.password = await bcrypt.hash(newPassword, 8);
@@ -462,15 +454,12 @@ module.exports = {
   updateUser,
   confirmeUser,
   authUser,
-  /* los controladores de los admins */
   enableUserByAdmin,
   getAllUserInfoAdmin,
   deleteUserByAdmin,
   resetPassword,
   comprobarToken,
-  /* a inplementar cuando tengamos terminado lo basico */
-  /* getFilterUserInfoByDeletedAt,
-  deleteUserByAdmin */
+
   newPassword,
   changePassword,
   verifyPassword

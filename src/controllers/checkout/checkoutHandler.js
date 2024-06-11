@@ -6,7 +6,6 @@ const stripe = require("stripe")(
 
 async function checkoutHl(req, res) {
   if (req.method === "POST") {
-    console.log(req.body);
     try {
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({

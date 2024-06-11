@@ -30,7 +30,6 @@ const uploadImageHl = async (req, res) => {
 
         try {
             upload(req,res, async (error)=> {
-                // console.log(req.file)
                 if(error) {
                     console.log(error);
         

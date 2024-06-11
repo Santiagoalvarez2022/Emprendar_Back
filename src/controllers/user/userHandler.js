@@ -184,11 +184,9 @@ const newPasswordHl = async (req, res) => {
 }
 
 const verifyPasswordHl = async (req, res) => {
-  console.log('Llega al handler')
 
   const { password, id } = req.body
-  console.log('password ->', password)
-  console.log('id ->', id)
+  
   try {
     const response = await verifyPassword(password, id )
 
@@ -202,8 +200,7 @@ const changePasswordHl = async (req, res) => {
 
   const { id, newPassword } = req.body
 
-  console.log('id en el handler', id)
-  console.log('pass en el handler', newPassword)
+  
   
   try {
     const response = await changePassword(id, newPassword)

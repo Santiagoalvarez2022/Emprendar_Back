@@ -13,7 +13,6 @@ const postNewReputation = async (data) => {
 
 const getReputationUser = async (data) => {
     let { qualifiedUser } = data
-    console.log(qualifiedUser);
     return await Reputation.findAll({ where: { qualifiedUser: qualifiedUser }, attributes: ['qualification'] })
         .then(res => {
             if (!res.length) return { reputation: 0, count: 0 }
@@ -30,7 +29,6 @@ const getReputationUser = async (data) => {
 
 const getMiPostReputation = async (data) => {
     let { userQualifier, qualifiedUser } = data
-    console.log('getMi =>>>>>', data);
     let result = await Reputation.findOne({ where: { qualifiedUser: qualifiedUser, userQualifier: userQualifier }, attributes: ['qualification'] })
 
     let reputation
@@ -45,7 +43,6 @@ const getMiPostReputation = async (data) => {
 
 const changeReputation = async (data) => {
     let { userQualifier, qualifiedUser, qualification } = data
-    console.log('getChange =>>>>>', data);
 
     let reputationToChange = await Reputation.findOne({ where: { userQualifier, qualifiedUser } })
 

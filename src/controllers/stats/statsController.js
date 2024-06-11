@@ -53,15 +53,11 @@ const goalSuccessMedia = async ()=>{
         attributes: ["goal", "amount_collected"],
         include: [{model: User, where: { confirmed: true, eliminatedByAdmin: false, deletedAt: null }, attributes: []}]
     })
-
-    console.log(AllProjects)
-
         let countAll = 0;
         let countGoalComplete = 0;
     for (const meta of AllProjects) {
         countAll = countAll + 1; 
   
-        console.log(meta.dataValues.amount_collected, meta.dataValues.goal)
         if(Number(meta.dataValues.amount_collected) >= Number(meta.dataValues.goal)){
             countGoalComplete = countGoalComplete + 1;
         }
@@ -74,8 +70,6 @@ const goalSuccessMedia = async ()=>{
         {name: "Sin Alcanzar la meta", value: countGoalIncomplete},
         {name: "Alcanzaron la meta", value: countGoalComplete},
     ]
-
-    console.log(result)
 
     return result;
 

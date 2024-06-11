@@ -5,13 +5,6 @@ const { proyectCreateEmail, emailPostValidateSuccess, emailPostValidateRejected}
 const { Project, User, Country, Category } = require('../../db')
 
 const addProject = async (data) => {
-
-    //TODO crear validaciones
-
-
-      
-
-    console.log('aca esta la data', data)
     const { title, summary, description, goal, img, userId, country, category } = data
 
     //validacion precaria xd
@@ -133,7 +126,6 @@ const getAllProjects = async (data, pageNum = 8) => {
         where3.where[`name`] = { [Op.iLike]: `%${category}%` }
     }
 
-    console.log(where1, where2, where3);
 
     let id = await Category.findOne({ where: { name: category }, attributes: ['id'] })
 
@@ -206,7 +198,6 @@ const getAllProjects = async (data, pageNum = 8) => {
             })
         }
     }
-    console.log(cantidad);
 
     return {
         data: result,
@@ -246,11 +237,7 @@ const getFilteredProjects = async (condition, pageNum = 4) => {
         ? thisCategory = { name: category }
         : thisCategory = null
 
-    console.log(
-        'ordennnnn', thisOrder,
-        'countryyyyy', thisCountry,
-        'categoryyyyyy', thisCategory
-    );
+   
 
     const { count, rows } = await Project.findAndCountAll({
         offset,

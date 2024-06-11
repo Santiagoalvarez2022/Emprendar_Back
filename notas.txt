@@ -1,4 +1,0 @@
-lista: 
-- falta .env 
-- cuando quiera subir las cosas a el back hacerlo conectandome a la base de dato y tirando un servidor para injectarle 
- 
