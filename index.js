@@ -15,6 +15,9 @@ conectarDB();
 console.log(process.env.FRONTEND_URL);
 const opcionesCors = {
   origin: process.env.FRONTEND_URL,
+  methods: 'GET,POST,PUT',
+  allowedHeaders: 'Content-Type',
+  credentials: true,
 }; 
 
 app.use(cors(opcionesCors));
