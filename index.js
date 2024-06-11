@@ -21,7 +21,7 @@ const opcionesCors = {
 }; 
 
 app.use(cors(opcionesCors));
-app.options('*', cors(corsOptions)); // Permitir solicitudes preflight para todas las rutas
+app.options('*', cors(opcionesCors)); // Permitir solicitudes preflight para todas las rutas
 //habilitamos leer los valores del body
 
 app.use(express.json());
