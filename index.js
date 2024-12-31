@@ -13,6 +13,7 @@ conectarDB();
 
 //habilitaamos cors
 console.log(process.env.FRONTEND_URL);
+ 
 const opcionesCors = {
   origin: process.env.FRONTEND_URL,
   methods: 'GET,POST,PUT',
@@ -22,7 +23,7 @@ const opcionesCors = {
 
 app.use(cors(opcionesCors));
 app.options('*', cors(opcionesCors)); // Permitir solicitudes preflight para todas las rutas
-//habilitamos leer los valores del body
+//habilitamos leer los valores del body 
 
 app.use(express.json());
 app.use(morgan("dev"))
@@ -52,14 +53,10 @@ const io = new socket.Server(server, {
 
 io.on("connection", (socket) => {
   console.log("conectado a socket.io");
-
   //definir los eventos
-  
-
   // (/chats)
   socket.on("messages",(data)=>{
     //data contien los datos del user que envia y el que recibe la info para saber que usuarios deberiar renderizar sus chats
-
     socket.broadcast.emit("messages", data)
   })
 
